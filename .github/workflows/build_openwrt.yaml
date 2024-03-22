@@ -27,7 +27,7 @@ jobs:
     - name: Configure OpenWrt
       run: |
         make defconfig
-        make menuconfig # Customize configuration here
+        make silentconfig # Customize configuration here
         
     - name: Compile OpenWrt
       run: |
