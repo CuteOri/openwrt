@@ -1,0 +1,34 @@
+name: OpenWrt Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libncurses5-dev zlib1g-dev gawk git ccache gettext libssl-dev xsltproc wget unzip python3
+      
+    - name: Update feeds and install packages
+      run: |
+        ./scripts/feeds update -a
+        ./scripts/feeds install -a
+      
+    - name: Configure OpenWrt
+      run: |
+        make defconfig
+        make menuconfig # Customize configuration here
+        
+    - name: Compile OpenWrt
+      run: |
+        make -j$(nproc)
