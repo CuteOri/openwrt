@@ -27,7 +27,12 @@ jobs:
     - name: Configure OpenWrt
       run: |
         make defconfig
-        make silentconfig # Customize configuration here
+        make menuconfig KCONFIG_CONFIG=./defconfig <<EOF
+        /Marvell EBU Armada
+        /Marvell Armada 7k/8k (ARM64)
+        /iEi Puzzle-M901
+        y
+        EOF
         
     - name: Compile OpenWrt
       run: |
