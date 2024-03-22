@@ -27,12 +27,8 @@ jobs:
     - name: Configure OpenWrt
       run: |
         make defconfig
-        make menuconfig KCONFIG_CONFIG=./defconfig <<EOF
-        /Marvell EBU Armada
-        /Marvell Armada 7k/8k (ARM64)
-        /iEi Puzzle-M901
-        y
-        EOF
+        sed -i 's/.*CONFIG_TARGET.*=.*$/CONFIG_TARGET_armvirt=y\nCONFIG_TARGET_armvirt_64=y\nCONFIG_TARGET_armvirt_64_Default=y/' .config
+        sed -i 's/.*CONFIG_TARGET_DEVICE_.*=.*$/CONFIG_TARGET_DEVICE_iEi_Puzzle-M901=y/' .config
         
     - name: Compile OpenWrt
       run: |
