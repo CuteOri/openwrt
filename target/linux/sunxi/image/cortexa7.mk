@@ -3,6 +3,8 @@
 # Copyright (C) 2013-2019 OpenWrt.org
 # Copyright (C) 2016 Yousong Zhou
 
+KERNEL_LOADADDR:=0x40008000
+
 define Device/cubietech_cubieboard2
   DEVICE_VENDOR := Cubietech
   DEVICE_MODEL := Cubieboard2
@@ -110,6 +112,14 @@ define Device/lemaker_bananapro
 endef
 TARGET_DEVICES += lemaker_bananapro
 
+define Device/licheepi_licheepi-zero-dock
+  DEVICE_VENDOR := LicheePi
+  DEVICE_MODEL := Zero with Dock (V3s)
+  DEVICE_PACKAGES:=kmod-rtc-sunxi
+  SOC := sun8i-v3s
+endef
+TARGET_DEVICES += licheepi_licheepi-zero-dock
+
 define Device/linksprite_pcduino3
   DEVICE_VENDOR := LinkSprite
   DEVICE_MODEL := pcDuino3
@@ -134,6 +144,14 @@ define Device/mele_m9
   SOC := sun6i-a31
 endef
 TARGET_DEVICES += mele_m9
+
+define Device/merrii_hummingbird
+  DEVICE_VENDOR := Merrii
+  DEVICE_MODEL := Hummingbird
+  DEVICE_PACKAGES:=kmod-brcmfmac cypress-firmware-43362-sdio wpad-basic-mbedtls
+  SOC := sun6i-a31
+endef
+TARGET_DEVICES += merrii_hummingbird
 
 define Device/olimex_a20-olinuxino-lime
   DEVICE_VENDOR := Olimex
@@ -167,6 +185,15 @@ define Device/olimex_a20-olinuxino-micro
   SOC := sun7i
 endef
 TARGET_DEVICES += olimex_a20-olinuxino-micro
+
+define Device/roofull_beelink-x2
+  DEVICE_VENDOR := Roofull
+  DEVICE_MODEL := Beelink-X2
+  DEVICE_PACKAGES:=kmod-leds-gpio kmod-gpio-button-hotplug \
+	kmod-brcmfmac cypress-firmware-43430-sdio wpad-basic-mbedtls
+  SOC := sun8i-h3
+endef
+TARGET_DEVICES += roofull_beelink-x2
 
 define Device/sinovoip_bananapi-m2-plus
   DEVICE_VENDOR := Sinovoip
